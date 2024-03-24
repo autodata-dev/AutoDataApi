@@ -16,14 +16,8 @@ jobs:
       - name: "Checkout repository"
         uses: actions/checkout@v4
 
-      - name: "Setup Java"
-        uses: actions/setup-java@v4
-        with:
-          distribution: "zulu"
-          java-version: "21"
-
-      - name: "Setup Gradle"
-        uses: gradle/gradle-build-action@v3
+      - name: "Setup Java and Gradle"
+        uses: actions/setup-java-and-gradle@v1
         
       - name: "Check formatting"
         run: ./gradlew spotlessCheck
