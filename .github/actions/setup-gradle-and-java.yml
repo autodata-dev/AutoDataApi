@@ -1,0 +1,32 @@
+name: Setup Java and Gradle
+description: Sets up Java and Gradle with their standard GHAs, provides the option to build
+
+inputs:
+  java-version:
+    type: number
+    default: 21
+    description: The Java JDK version
+  java-distribution:
+    type: string
+    default: zulu
+    description: The JDK distributor to use e.g. OpenJDK, Azul
+  run-build:
+    type: boolean
+    default: false
+    description: If true, the gradle build command will be run
+
+runs:
+  using: composite
+  steps:
+    - name: Setup Java
+      uses: actions/setup-java@v4
+      with:
+        distribution: $inputs.java-distribution
+        java-version: inputs.java-version
+
+    - name: Setup Gradle
+      uses: gradle/actions/setup-gradle@v3
+
+    - if: inputs.run-build
+    - name: Build Gradle
+      run: ./gradlew build
