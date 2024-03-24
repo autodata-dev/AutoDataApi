@@ -12,8 +12,8 @@ jobs:
       - name: "Checkout repository"
         uses: actions/checkout@v4
 
-      - name: "Setup java and gradle"
-        uses: autodata-dev/actions/setup-java-and-gradle@v1
+      - name: "Setup Gradle and Java"
+        uses: autodata-dev/actions/setup-gradle-and-java@v1
 
       - name: "Run tests"
         run: ./gradlew test

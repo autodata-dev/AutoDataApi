@@ -12,7 +12,7 @@ jobs:
       - name: "Checkout repository"
         uses: actions/checkout@v4
 
-      - name: "Setup Java and Gradle"
+      - name: "Setup Gradle and Java"
         uses: autodata-dev/actions/setup-gradle-and-java@v1
         
       - name: "Check formatting"
