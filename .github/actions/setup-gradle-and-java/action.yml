@@ -1,5 +1,4 @@
 name: Setup Java and Gradle
-shell: bash
 description: Sets up Java and Gradle with their standard GHAs, provides the option to build
 
 inputs:
@@ -30,4 +29,5 @@ runs:
 
     - name: Run gradle build
       run: ./gradlew build
+      shell: bash
       if: inputs.run-build
