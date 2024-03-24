@@ -13,7 +13,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: "Setup Gradle and Java"
-        uses: autodata-dev/actions/gradle/setup-with-java@v1
+        uses: autodata-dev/actions/setup-gradle-with-java@v3
         
       - name: "Check formatting"
         run: ./gradlew spotlessCheck
