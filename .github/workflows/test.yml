@@ -1,0 +1,19 @@
+name: Test
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: "ubuntu-latest"
+
+    steps:
+      - name: "Checkout repository"
+        uses: actions/checkout@v4
+
+      - name: "Setup java and gradle"
+        uses: autodata-dev/actions/setup-java-and-gradle@v1
+
+      - name: "Run tests"
+        run: ./gradlew test
