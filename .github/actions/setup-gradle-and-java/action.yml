@@ -21,8 +21,8 @@ runs:
     - name: Setup java
       uses: actions/setup-java@v4
       with:
-        distribution: $inputs.java-distribution
-        java-version: inputs.java-version
+        distribution: ${{ inputs.java-distribution }}
+        java-version: ${{ inputs.java-version }}
 
     - name: Setup gradle
       uses: gradle/actions/setup-gradle@v3
