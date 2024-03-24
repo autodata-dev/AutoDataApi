@@ -1,12 +1,12 @@
-name: Check Format
+name: Test
 
 on:
   push:
   workflow_dispatch:
 
 jobs:
-  check-format:
-    runs-on: ubuntu-latest
+  test:
+    runs-on: "ubuntu-latest"
 
     steps:
       - name: "Checkout repository"
@@ -14,6 +14,6 @@ jobs:
 
       - name: "Setup Gradle and Java"
         uses: autodata-dev/actions/setup-gradle-with-java@v3
-        
-      - name: "Check formatting"
-        run: ./gradlew spotlessCheck
+
+      - name: "Run tests"
+        run: ./gradlew test
