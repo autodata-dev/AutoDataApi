@@ -18,15 +18,15 @@ inputs:
 runs:
   using: composite
   steps:
-    - name: Setup Java
+    - name: Setup java
       uses: actions/setup-java@v4
       with:
         distribution: $inputs.java-distribution
         java-version: inputs.java-version
 
-    - name: Setup Gradle
+    - name: Setup gradle
       uses: gradle/actions/setup-gradle@v3
 
-    - if: inputs.run-build
-    - name: Build Gradle
+    - name: Run gradle build
       run: ./gradlew build
+      if: inputs.run-build
