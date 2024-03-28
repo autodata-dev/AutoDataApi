@@ -17,6 +17,7 @@ class TableDataFetcher {
             success = { true },
             message = { "Table generated successfully." },
             resource = { "https://www.generatedtableresource.com" },
+            rowCount = { input.metadata.numRows },
         )
     }
 }

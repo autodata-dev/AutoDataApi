@@ -7,14 +7,20 @@ type GenerateTableResponse {
     success: Boolean!
     message: String!
     resource: String
+    rowCount: Int!
 }
 
 input GenerateTableInput {
+    metadata: MetadataInput!
     strings: [StringInput!]
     integers: [IntegerInput!]
     decimals: [DecimalInput!]
     serials: [SerialInput!]
     uuids: [UUIDInput!]
+}
+
+input MetadataInput {
+    numRows: Int!
 }
 
 input StringInput {
