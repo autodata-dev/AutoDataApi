@@ -1,4 +1,59 @@
-type Query {
-    helloWorld: String
+type Mutation {
+    generateTable(input: GenerateTableInput!): GenerateTableResponse!
 }
+
+type GenerateTableResponse {
+    code: Int!
+    success: Boolean!
+    message: String!
+    resource: String
+    rowCount: Int!
+}
+
+input GenerateTableInput {
+    metadata: MetadataInput!
+    strings: [StringInput!]
+    integers: [IntegerInput!]
+    decimals: [DecimalInput!]
+    serials: [SerialInput!]
+    uuids: [UUIDInput!]
+}
+
+input MetadataInput {
+    numRows: Int!
+}
+
+input StringInput {
+    name: String!
+    globalPosition: Int
+    minLength: Int
+    maxLength: Int
+}
+
+input IntegerInput {
+    name: String!
+    globalPosition: Int
+    min: Int
+    max: Int
+}
+
+input DecimalInput {
+    name: String!
+    globalPosition: Int
+    min: Int
+    max: Int
+    precision: Int
+    scale: Int
+}
+
+input SerialInput {
+    name: String!
+    globalPosition: Int
+}
+
+input UUIDInput {
+    name: String!
+    globalPosition: Int
+}
+
 

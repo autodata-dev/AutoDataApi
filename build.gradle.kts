@@ -4,6 +4,7 @@ plugins {
 	id("org.springframework.boot") version "3.2.4"
 	id("io.spring.dependency-management") version "1.1.4"
 	id("com.diffplug.spotless") version "6.25.0"
+	id("com.netflix.dgs.codegen") version "6.1.5"
 	kotlin("jvm") version "1.9.23"
 	kotlin("plugin.spring") version "1.9.23"
 }
@@ -33,12 +34,21 @@ dependencies {
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("io.kotest:kotest-runner-junit5:latest.release")
 	testImplementation("io.kotest:kotest-property:latest.release")
+	testImplementation("io.kotest.extensions:kotest-extensions-spring:1.1.3")
 }
 
 configure<com.diffplug.gradle.spotless.SpotlessExtension> {
 	kotlin {
-		ktfmt()
+		targetExclude("build/**/*")
+		ktlint()
 	}
+}
+
+tasks.withType<com.netflix.graphql.dgs.codegen.gradle.GenerateJavaTask> {
+	generateClient = true
+	language = "kotlin"
+	generateKotlinNullableClasses = true
+	generateKotlinClosureProjections = true
 }
 
 afterEvaluate {
