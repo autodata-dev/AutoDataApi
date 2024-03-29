@@ -41,7 +41,7 @@ dependencies {
 configure<com.diffplug.gradle.spotless.SpotlessExtension> {
 	kotlin {
 		targetExclude("build/**/*")
-		ktlint()
+		ktfmt().kotlinlangStyle()
 	}
 }
 
