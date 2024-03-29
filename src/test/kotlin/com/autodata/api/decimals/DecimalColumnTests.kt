@@ -5,6 +5,7 @@ import io.kotest.datatest.withData
 import io.kotest.matchers.bigdecimal.shouldBeGreaterThanOrEquals
 import io.kotest.matchers.bigdecimal.shouldBeInRange
 import io.kotest.matchers.bigdecimal.shouldBeLessThanOrEquals
+import io.kotest.matchers.shouldBe
 
 class DecimalColumnTests :
     DescribeSpec({
@@ -15,7 +16,7 @@ class DecimalColumnTests :
                     DecimalRange(-1000.0),
                     DecimalRange(-1.0),
                     DecimalRange(0.0),
-                        DecimalRange(Double.MIN_VALUE),
+                    DecimalRange(Double.MIN_VALUE),
                     DecimalRange(1.0),
                     DecimalRange(1000.0),
                     DecimalRange(Double.MAX_VALUE)
@@ -54,6 +55,14 @@ class DecimalColumnTests :
                     val value = DecimalColumn(range).generate()
 
                     value.shouldBeInRange(range.min.toBigDecimal()..range.max.toBigDecimal())
+                }
+            }
+
+            describe("Meets the scale") {
+                withData(Scale(0), Scale(1), Scale(10), Scale(38)) { scale ->
+                    val value = DecimalColumn(scale = scale).generate()
+
+                    value.scale() shouldBe scale.value
                 }
             }
         }

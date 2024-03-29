@@ -7,8 +7,7 @@ import kotlin.random.Random
 
 class DecimalColumn(
     private val range: DecimalRange = DecimalRange(),
-    private val scale: Scale = Scale(),
-    private val precision: Precision = Precision()
+    private val scale: Scale = Scale()
 ) : Column<BigDecimal> {
 
     override fun generate(): BigDecimal {
@@ -16,7 +15,6 @@ class DecimalColumn(
 
         val double = Random.nextDouble(range.min, range.max)
         val value = BigDecimal(double)
-        value.setScale(scale.value + (precision.value - value.precision()), RoundingMode.HALF_UP)
-        return value
+        return value.setScale(scale.value, RoundingMode.HALF_UP)
     }
 }

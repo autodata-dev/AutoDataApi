@@ -1,7 +1,5 @@
 package com.autodata.api.integers
 
-import com.autodata.api.integers.IntegerColumn
-import com.autodata.api.integers.IntegerRange
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.datatest.withData
 import io.kotest.matchers.ints.shouldBeGreaterThanOrEqual

@@ -42,7 +42,6 @@ input DecimalInput {
     globalPosition: Int
     min: Int
     max: Int
-    precision: Int
     scale: Int
 }
 
