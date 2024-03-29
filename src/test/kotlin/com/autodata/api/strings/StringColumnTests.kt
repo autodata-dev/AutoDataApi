@@ -18,7 +18,8 @@ class StringColumnTests :
             }
 
             describe("Meets maximum length") {
-                withData(StringLength(max = 0), StringLength(max = 1), StringLength(max = 1024)) { length ->
+                withData(StringLength(max = 0), StringLength(max = 1), StringLength(max = 1024)) {
+                    length ->
                     val value = StringColumn(length).generate()
 
                     value.length shouldBeLessThanOrEqual length.max
@@ -26,8 +27,12 @@ class StringColumnTests :
             }
 
             describe("Meets range") {
-                withData(StringLength(0, 1), StringLength(10, 100), StringLength(100, 101), StringLength(1024, 1024)) {
-                    length ->
+                withData(
+                    StringLength(0, 1),
+                    StringLength(10, 100),
+                    StringLength(100, 101),
+                    StringLength(1024, 1024)
+                ) { length ->
                     val value = StringColumn(length).generate()
 
                     value.length shouldBeInRange length.min..length.max
