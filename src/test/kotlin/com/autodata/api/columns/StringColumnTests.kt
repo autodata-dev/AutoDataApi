@@ -1,4 +1,4 @@
-package com.autodata.api.strings
+package com.autodata.api.columns
 
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.DescribeSpec
@@ -12,18 +12,18 @@ private data class LengthRange(val min: Int, val max: Int)
 class StringColumnTests : DescribeSpec({
     describe("When generating a value") {
         describe("Meets minimum length") {
-            withData(0, 1, 1000) {
-                val value = StringColumn(it).generate()
+            withData(0, 1, 1024) { minLength ->
+                val value = StringColumn(minLength).generate()
 
-                value.length shouldBeGreaterThanOrEqual it
+                value.length shouldBeGreaterThanOrEqual minLength
             }
         }
 
         describe("Meets maximum length") {
-            withData(0, 1, 2, 1000) {
-                val value = StringColumn(maxLength = it).generate()
+            withData(0, 1, 1024) { maxLength ->
+                val value = StringColumn(maxLength = maxLength).generate()
 
-                value.length shouldBeLessThanOrEqual it
+                value.length shouldBeLessThanOrEqual maxLength
             }
         }
 
@@ -44,6 +44,7 @@ class StringColumnTests : DescribeSpec({
                 LengthRange(1, 0),
                 LengthRange(100, 99),
                 LengthRange(-2, -1),
+                LengthRange(Int.MIN_VALUE, Int.MAX_VALUE),
             ) { (min, max) ->
                 shouldThrow<IllegalArgumentException> {
                     StringColumn(min, max).generate()
