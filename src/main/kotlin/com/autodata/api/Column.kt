@@ -1,5 +1,7 @@
 package com.autodata.api
 
-interface Column<T> {
+import java.io.Serializable
+
+interface Column<T : Serializable> {
     fun generate(): T
 }
