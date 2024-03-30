@@ -28,6 +28,7 @@ class StringColumnTests :
 
             describe("Meets range") {
                 withData(
+                    StringLength(0, 0),
                     StringLength(0, 1),
                     StringLength(10, 100),
                     StringLength(100, 101),
