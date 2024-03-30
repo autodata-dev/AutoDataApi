@@ -7,9 +7,10 @@ class SerialColumnTests :
     DescribeSpec({
         describe("When generating a value") {
             it("Generates values sequentially") {
+                val column = SerialColumn()
                 val values = mutableListOf<Int>()
 
-                repeat(100) { values.add(SerialColumn().generate()) }
+                repeat(100) { values.add(column.generate()) }
 
                 values shouldBe (1..100).toList()
             }

@@ -9,9 +9,10 @@ class UUIDColumnTests :
     DescribeSpec({
         describe("When generating a value") {
             it("Every uuid is unique") {
+                val column = UUIDColumn()
                 val uuids = HashSet<UUID>()
 
-                repeat(100) { uuids.add(UUIDColumn().generate()) }
+                repeat(100) { uuids.add(column.generate()) }
 
                 uuids.size shouldBe 100
             }
