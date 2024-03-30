@@ -1,54 +1,43 @@
 package com.autodata.api.strings
 
-import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.datatest.withData
 import io.kotest.matchers.ints.shouldBeGreaterThanOrEqual
 import io.kotest.matchers.ints.shouldBeInRange
 import io.kotest.matchers.ints.shouldBeLessThanOrEqual
 
-private data class LengthRange(val min: Int, val max: Int)
+class StringColumnTests :
+    DescribeSpec({
+        describe("When generating a value") {
+            describe("Meets minimum length") {
+                withData(StringLength(0), StringLength(1), StringLength(1024)) { length ->
+                    val value = StringColumn(length).generate()
 
-class StringColumnTests : DescribeSpec({
-    describe("When generating a value") {
-        describe("Meets minimum length") {
-            withData(0, 1, 1000) {
-                val value = StringColumn(it).generate()
-
-                value.length shouldBeGreaterThanOrEqual it
+                    value.length shouldBeGreaterThanOrEqual length.min
+                }
             }
-        }
 
-        describe("Meets maximum length") {
-            withData(0, 1, 2, 1000) {
-                val value = StringColumn(maxLength = it).generate()
+            describe("Meets maximum length") {
+                withData(StringLength(max = 0), StringLength(max = 1), StringLength(max = 1024)) {
+                    length ->
+                    val value = StringColumn(length).generate()
 
-                value.length shouldBeLessThanOrEqual it
+                    value.length shouldBeLessThanOrEqual length.max
+                }
             }
-        }
 
-        describe("Meets range") {
-            withData(
-                LengthRange(0, 1),
-                LengthRange(10, 100),
-                LengthRange(100, 101),
-            ) { (min, max) ->
-                val value = StringColumn(min, max).generate()
+            describe("Meets range") {
+                withData(
+                    StringLength(0, 0),
+                    StringLength(0, 1),
+                    StringLength(10, 100),
+                    StringLength(100, 101),
+                    StringLength(1024, 1024)
+                ) { length ->
+                    val value = StringColumn(length).generate()
 
-                value.length shouldBeInRange min..max
-            }
-        }
-
-        describe("Throws when the range is invalid") {
-            withData(
-                LengthRange(1, 0),
-                LengthRange(100, 99),
-                LengthRange(-2, -1),
-            ) { (min, max) ->
-                shouldThrow<IllegalArgumentException> {
-                    StringColumn(min, max).generate()
+                    value.length shouldBeInRange length.min..length.max
                 }
             }
         }
-    }
-})
+    })

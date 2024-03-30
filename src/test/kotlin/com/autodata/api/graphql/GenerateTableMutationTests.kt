@@ -38,7 +38,11 @@ class GenerateTableMutationTests(dgsQueryExecutor: DgsQueryExecutor) :
 
         it("Generates the correct number of rows") {
             val numRows = 1000
-            val input = GenerateTableInput(metadata = MetadataInput(numRows), strings = listOf(StringInput("Column")))
+            val input =
+                GenerateTableInput(
+                    metadata = MetadataInput(numRows),
+                    strings = listOf(StringInput("Column"))
+                )
 
             val mutation = DgsClient.buildMutation { generateTable(input) { rowCount } }
 
