@@ -10,7 +10,11 @@ class StringColumn(private val length: StringLength = StringLength()) : Column<S
 
     override fun generate(): String {
         val stringBuilder = StringBuilder()
-        val length = Random.nextInt(length.min, length.max + 1)
+        val length = if (length.min == length.max) {
+            length.min
+        } else {
+            Random.nextInt(length.min, length.max)
+        }
 
         while (stringBuilder.length < length) {
             stringBuilder.append(DEFAULT_CHARACTERS.random())
