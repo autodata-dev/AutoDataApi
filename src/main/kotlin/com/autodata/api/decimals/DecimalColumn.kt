@@ -6,9 +6,10 @@ import java.math.RoundingMode
 import kotlin.random.Random
 
 class DecimalColumn(
+    name: String,
     private val range: DecimalRange = DecimalRange(),
     private val scale: Scale = Scale()
-) : Column<BigDecimal> {
+) : Column<BigDecimal>(name) {
 
     override fun generate(): BigDecimal {
         if (range.min == range.max) return range.min.toBigDecimal()

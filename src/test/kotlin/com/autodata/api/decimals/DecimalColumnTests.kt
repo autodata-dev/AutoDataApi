@@ -21,7 +21,7 @@ class DecimalColumnTests :
                     DecimalRange(1000.0),
                     DecimalRange(Double.MAX_VALUE)
                 ) { range ->
-                    val value = DecimalColumn(range).generate()
+                    val value = DecimalColumn("name", range).generate()
 
                     value.shouldBeGreaterThanOrEquals(range.min.toBigDecimal())
                 }
@@ -38,7 +38,7 @@ class DecimalColumnTests :
                     DecimalRange(max = 1000.0),
                     DecimalRange(max = Double.MAX_VALUE)
                 ) { range ->
-                    val value = DecimalColumn(range).generate()
+                    val value = DecimalColumn("name", range).generate()
 
                     value.shouldBeLessThanOrEquals(range.max.toBigDecimal())
                 }
@@ -52,7 +52,7 @@ class DecimalColumnTests :
                     DecimalRange(Double.MAX_VALUE, Double.MAX_VALUE),
                     DecimalRange(-1.0, 1.0)
                 ) { range ->
-                    val value = DecimalColumn(range).generate()
+                    val value = DecimalColumn("name", range).generate()
 
                     value.shouldBeInRange(range.min.toBigDecimal()..range.max.toBigDecimal())
                 }
@@ -60,7 +60,7 @@ class DecimalColumnTests :
 
             describe("Meets the scale") {
                 withData(Scale(0), Scale(1), Scale(10), Scale(38)) { scale ->
-                    val value = DecimalColumn(scale = scale).generate()
+                    val value = DecimalColumn("name", scale = scale).generate()
 
                     value.scale() shouldBe scale.value
                 }

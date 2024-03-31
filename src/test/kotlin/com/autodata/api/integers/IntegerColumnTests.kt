@@ -19,7 +19,7 @@ class IntegerColumnTests :
                     IntegerRange(1000),
                     IntegerRange(Int.MAX_VALUE)
                 ) { range ->
-                    val value = IntegerColumn(range).generate()
+                    val value = IntegerColumn("name", range).generate()
 
                     value shouldBeGreaterThanOrEqual range.min
                 }
@@ -35,7 +35,7 @@ class IntegerColumnTests :
                     IntegerRange(max = 1000),
                     IntegerRange(max = Int.MAX_VALUE)
                 ) { range ->
-                    val value = IntegerColumn(range).generate()
+                    val value = IntegerColumn("name", range).generate()
 
                     value shouldBeLessThanOrEqual range.max
                 }
@@ -51,7 +51,7 @@ class IntegerColumnTests :
                     IntegerRange(Int.MIN_VALUE, Int.MIN_VALUE),
                     IntegerRange(Int.MAX_VALUE, Int.MAX_VALUE)
                 ) { range ->
-                    val value = IntegerColumn(range).generate()
+                    val value = IntegerColumn("name", range).generate()
 
                     value shouldBeInRange range.min..range.max
                 }
