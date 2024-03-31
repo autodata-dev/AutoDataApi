@@ -1,5 +1,6 @@
 package com.autodata.api.integers
 
+import com.appmattus.kotlinfixture.kotlinFixture
 import io.kotest.core.spec.style.DescribeSpec
 import io.kotest.datatest.withData
 import io.kotest.matchers.ints.shouldBeGreaterThanOrEqual
@@ -8,6 +9,8 @@ import io.kotest.matchers.ints.shouldBeLessThanOrEqual
 
 class IntegerColumnTests :
     DescribeSpec({
+        val fixture = kotlinFixture()
+
         describe("When generating a value") {
             describe("Meets the minimum") {
                 withData(
@@ -19,7 +22,7 @@ class IntegerColumnTests :
                     IntegerRange(1000),
                     IntegerRange(Int.MAX_VALUE)
                 ) { range ->
-                    val value = IntegerColumn("name", range).generate()
+                    val value = IntegerColumn(fixture<String>(), range).generate()
 
                     value shouldBeGreaterThanOrEqual range.min
                 }
@@ -35,7 +38,7 @@ class IntegerColumnTests :
                     IntegerRange(max = 1000),
                     IntegerRange(max = Int.MAX_VALUE)
                 ) { range ->
-                    val value = IntegerColumn("name", range).generate()
+                    val value = IntegerColumn(fixture<String>(), range).generate()
 
                     value shouldBeLessThanOrEqual range.max
                 }
@@ -51,7 +54,7 @@ class IntegerColumnTests :
                     IntegerRange(Int.MIN_VALUE, Int.MIN_VALUE),
                     IntegerRange(Int.MAX_VALUE, Int.MAX_VALUE)
                 ) { range ->
-                    val value = IntegerColumn("name", range).generate()
+                    val value = IntegerColumn(fixture<String>(), range).generate()
 
                     value shouldBeInRange range.min..range.max
                 }
