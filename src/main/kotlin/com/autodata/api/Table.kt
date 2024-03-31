@@ -14,5 +14,7 @@ class Table(private val input: GenerateTableInput) {
         }
     }
 
-    fun generate(): Sequence<Row> = sequence { repeat(input.metadata.numRows) { yield(Row()) } }
+    fun generate(): Sequence<Row> = sequence {
+        repeat(input.metadata.numRows) { yield(Row(_columns)) }
+    }
 }

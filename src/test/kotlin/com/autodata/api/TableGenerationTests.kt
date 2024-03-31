@@ -52,5 +52,14 @@ class TableGenerationTests :
                     Table(input)
                 }
             }
+
+            it("Generates rows with correct values") {
+                val metadata = MetadataInput(10)
+                val serials = listOf(SerialInput("B", globalPosition = 1))
+                val input = GenerateTableInput(metadata, serials = serials)
+                val sut = Table(input)
+
+                sut.generate().forEachIndexed { i, row -> row.values.toList()[0] shouldBe i + 1 }
+            }
         }
     })

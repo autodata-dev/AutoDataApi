@@ -1,3 +1,8 @@
 package com.autodata.api
 
-class Row {}
+import java.io.Serializable
+
+class Row(private val columns: List<Column<*>>) {
+    val values: Sequence<Serializable>
+        get() = sequence { columns.forEach { yield(it.generate()) } }
+}
