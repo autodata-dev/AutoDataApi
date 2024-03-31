@@ -1,16 +1,17 @@
 package com.autodata.api.decimals
 
-@JvmInline
-value class Scale(val value: Int = MAX_VALUE) {
+class Scale(value: Int? = null) {
+    val value = value ?: MAX_VALUE
+
     companion object {
         private const val MAX_VALUE = 38
     }
 
     init {
-        if (value < 0) {
+        if (this.value < 0) {
             throw IllegalArgumentException("Scale $value must be non-negative")
         }
-        if (value > MAX_VALUE) {
+        if (this.value > MAX_VALUE) {
             throw IllegalArgumentException("Scale $value must be less than or equal to $MAX_VALUE")
         }
     }

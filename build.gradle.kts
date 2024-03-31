@@ -36,6 +36,7 @@ dependencies {
 	testImplementation("io.kotest:kotest-property:latest.release")
 	testImplementation("io.kotest:kotest-framework-datatest:latest.release")
 	testImplementation("io.kotest.extensions:kotest-extensions-spring:1.1.3")
+	testImplementation("com.appmattus.fixture:fixture:1.2.0")
 }
 
 configure<com.diffplug.gradle.spotless.SpotlessExtension> {

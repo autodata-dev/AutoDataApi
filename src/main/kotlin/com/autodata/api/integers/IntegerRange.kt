@@ -1,8 +1,11 @@
 package com.autodata.api.integers
 
-class IntegerRange(val min: Int = Int.MIN_VALUE, val max: Int = Int.MAX_VALUE) {
+class IntegerRange(min: Int? = null, max: Int? = null) {
+    val min = min ?: Int.MIN_VALUE
+    val max = max ?: Int.MAX_VALUE
+
     init {
-        if (min > max) {
+        if (this.min > this.max) {
             throw IllegalArgumentException(
                 "Minimum value $min must be less than or equal to maximum value $max"
             )

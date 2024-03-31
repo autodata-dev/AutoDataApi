@@ -40,8 +40,8 @@ input IntegerInput {
 input DecimalInput {
     name: String!
     globalPosition: Int
-    min: Int
-    max: Int
+    min: Float
+    max: Float
     scale: Int
 }
 

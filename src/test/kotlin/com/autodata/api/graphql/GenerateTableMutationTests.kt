@@ -1,5 +1,6 @@
 package com.autodata.api.graphql
 
+import com.appmattus.kotlinfixture.kotlinFixture
 import com.autodata.api.TableDataFetcher
 import com.netflix.dgs.codegen.generated.DgsClient
 import com.netflix.dgs.codegen.generated.types.GenerateTableInput
@@ -16,12 +17,14 @@ import org.springframework.test.context.ContextConfiguration
 @SpringBootTest(classes = [DgsAutoConfiguration::class, TableDataFetcher::class])
 class GenerateTableMutationTests(dgsQueryExecutor: DgsQueryExecutor) :
     DescribeSpec({
+        val fixture = kotlinFixture()
+
         describe("When successful") {
             it("Returns the url to the generated table") {
                 val input =
                     GenerateTableInput(
                         metadata = MetadataInput(1000),
-                        strings = listOf(StringInput("Column")),
+                        strings = listOf(StringInput(fixture<String>())),
                     )
 
                 val mutation = DgsClient.buildMutation { generateTable(input) { resource } }
@@ -41,7 +44,7 @@ class GenerateTableMutationTests(dgsQueryExecutor: DgsQueryExecutor) :
             val input =
                 GenerateTableInput(
                     metadata = MetadataInput(numRows),
-                    strings = listOf(StringInput("Column"))
+                    strings = listOf(StringInput(fixture<String>()))
                 )
 
             val mutation = DgsClient.buildMutation { generateTable(input) { rowCount } }
